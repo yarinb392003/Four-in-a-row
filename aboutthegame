@@ -1,0 +1,47 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+public class aboutthegame extends JFrame {
+	public static JPanel panel=new JPanel();
+	public static JLabel lblNewLabel=new JLabel();
+	
+	public aboutthegame() {
+		setTitle("Four in a row");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100,100,850,540);
+		getContentPane().add(panel);
+		
+		setVisible(true);
+		panel.setVisible(true);
+		panel.setLayout(null);
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\user\\Pictures\\info_750x540.png"));
+		lblNewLabel.setBounds(0, 0,728, 540);
+		panel.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("back to start");
+		btnNewButton.setBounds(724, 0, 110, 501);
+		panel.add(btnNewButton);
+		lblNewLabel.setVisible(true);
+		ActionListener hear = new ActionListener()
+		{
+		public void actionPerformed(ActionEvent actionEvent) {
+		if(actionEvent.getSource().equals(btnNewButton))
+		{
+			
+			game frame5=new game();
+			frame5.setVisible(true);
+		
+		}
+		}};
+		btnNewButton.addActionListener(hear);
+		
+		
+	}
+}
