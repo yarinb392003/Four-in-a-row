@@ -1,0 +1,1042 @@
+
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class game3 extends JFrame implements MouseListener{
+//public static game3 frame3=new game3();
+JPanel panel=new JPanel();
+JButton btn=new JButton("press");
+//JLabel lblChooseWhoStarts = new JLabel("choose who starts first:");
+JLabel lblNewLabel = new JLabel((new ImageIcon("C:\\Users\\user\\Pictures\\700428_700x527.png")));
+public int[]arr2;
+public static board board2;
+public static boolean p1IsNowPlaying=true;
+public  static Color p1Color=Color.RED;
+public  static Color p2Color=Color.GREEN;
+public static boolean hardlevel=false;
+
+
+
+public game3() {
+setTitle("Four in a row");
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+setBounds(100,100,850,540);
+add(panel);
+//panel.add(btn);
+panel.setSize(850,540);
+//btn.setSize(50, 50);
+btn.setBounds(0, 900, 50, 50);
+setVisible(true);
+panel.setVisible(true);
+btn.setVisible(true);
+panel.setBackground(Color.BLUE);
+
+
+lblNewLabel.setIcon(new ImageIcon("C:\\Users\\user\\Pictures\\700428_700x527.png"));
+lblNewLabel.setBounds(0, 0, 680, 527);
+panel.add(lblNewLabel);
+
+
+panel.setLayout(null);
+/*
+lblChooseWhoStarts.setFont(new Font("Tahoma", Font.BOLD, 12));
+lblChooseWhoStarts.setBounds(680, 200, 151, 47);
+lblChooseWhoStarts.setVisible(true);
+panel.add(lblChooseWhoStarts);
+*/
+
+/*JLabel lblNewLabel_3 = new JLabel(" the turm of:");
+lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
+lblNewLabel_3.setBounds(720, 145, 91, 33);
+lblNewLabel_3.setVisible(true);
+panel.add(lblNewLabel_3);
+
+*/
+
+JButton btnNewButton = new JButton("quit game\r\n");
+btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+btnNewButton.setBounds(707, 401, 113, 23);
+panel.add(btnNewButton);
+
+JButton btnNewButton_1 = new JButton("back to start");
+btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+btnNewButton_1.setBounds(707, 462, 115, 23);
+panel.add(btnNewButton_1);
+
+String easy = "easy";
+String hard = "hard";
+String [] gamelevel= {easy,hard};
+JComboBox comboBox = new JComboBox(gamelevel);
+comboBox.setBounds(714, 250, 91, 61);
+panel.add(comboBox);
+
+
+JLabel label1=new JLabel("Game level:");
+label1.setBounds(720,190 , 91, 60);
+panel.add(label1);
+label1.setVisible(true);
+
+
+JButton btn5=new JButton("new game");
+btn5.setBounds(707, 350, 115, 23);
+panel.add(btn5);
+btn5.setVisible(true);
+
+
+
+
+board2=new board();
+
+
+
+arr2=new int[7];
+arr2[0]=0;
+for(int i=1;i<arr2.length;i++)
+{
+arr2[i]=arr2[i-1]+97;
+}
+
+this.addMouseListener(this);
+
+
+
+
+ActionListener hear = new ActionListener()
+{
+public void actionPerformed(ActionEvent actionEvent) {
+if(actionEvent.getSource().equals(btnNewButton))
+{
+System.exit(0);
+}
+if(actionEvent.getSource().equals(btnNewButton_1))
+{
+	
+	game frame=new game();
+	frame.setVisible(true);
+}
+if(actionEvent.getSource().equals(btn5))
+{
+	
+	game3 panel=new game3();
+	panel.setVisible(true);
+	
+	}
+if(actionEvent.getSource().equals(comboBox))
+{
+	if(((String)comboBox.getSelectedItem()).equals(easy))
+	{
+		JOptionPane.showMessageDialog(null, "changed to easy");
+		hardlevel=false;
+		
+	}
+	if(((String)comboBox.getSelectedItem()).equals(hard))
+	{
+		JOptionPane.showMessageDialog(null, "changed to hard");
+		hardlevel=true;
+		
+	}
+	
+	
+}
+	
+		
+	
+
+	
+	
+
+
+
+}
+
+};
+
+btnNewButton.addActionListener(hear);
+btnNewButton_1.addActionListener(hear);
+btn5.addActionListener(hear);
+comboBox.addActionListener(hear);
+
+
+}
+
+
+	
+
+
+public static  Result getResult()
+{
+	Result theresult=new Result();
+	
+	for(int i=0;i<6;i++)
+	{
+		for(int j=0;j<7;j++)
+		{
+			if((board2.arr[i][j].player!=null) && (board2.arr[i][j].player.equals("p1")))
+			{
+				try {
+				
+				
+				if(board2.arr[i+1][j].player.equals( "p1") && board2.arr[i+2][j].player.equals("p1") && board2.arr[i+3][j].player.equals("p1")) 
+				{
+					theresult.p1=1;
+					theresult.p2=0;
+					return theresult;
+					
+				}
+				}
+				catch(Exception e)
+				{
+					
+					
+				
+				}
+			}
+			
+		
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player.equals("p1"))
+			{
+				try {
+				if(board2.arr[i][j+1].player.equals("p1") && board2.arr[i][j+2].player.equals("p1") && board2.arr[i][j+3].player.equals ("p1"))
+				{
+					theresult.p1=1;
+					theresult.p2=0;
+					return theresult;
+				
+				}
+				}
+				catch(Exception e) {
+					
+				}
+			}
+			
+			
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player.equals("p1"))
+			{
+				try {
+				if(board2.arr[i+1][j+1].player.equals ("p1") && board2.arr[i+2][j+2].player.equals("p1") && board2.arr[i+3][j+3].player.equals( "p1"))
+				{
+					theresult.p1=1;
+					theresult.p2=0;
+					return theresult;
+				
+				}
+				}
+				catch(Exception e) {
+					
+				}
+			}
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player=="p1")
+			{
+				try {
+				if(board2.arr[i-1][j+1].player == "p1" && board2.arr[i-2][j+2].player == "p1" && board2.arr[i-3][j+3].player == "p1")
+				{
+					theresult.p1=1;
+					theresult.p2=0;
+					return theresult;
+				
+				}
+				}
+				catch(Exception e) {
+					
+				}
+			}
+			
+			
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player=="p2")
+			{
+				try {
+				if(board2.arr[i+1][j].player == "p2" && board2.arr[i+2][j].player == "p2" && board2.arr[i+3][j].player == "p2") 
+				{
+					theresult.p1=0;
+					theresult.p2=1;
+					return theresult;
+				}
+				}
+				catch(Exception e) {
+					
+				}
+				
+				
+			}	
+			
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player=="p2")
+			{
+				try {
+				if(board2.arr[i][j+1].player == "p2" && board2.arr[i][j+2].player == "p2" && board2.arr[i][j+3].player == "p2")
+				{
+					theresult.p1=0;
+					theresult.p2=1;
+					return theresult;
+				
+				}
+				}
+				catch(Exception e) {
+					
+				}
+			}
+			
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player=="p2")
+			{
+				try {
+				if(board2.arr[i+1][j+1].player == "p2" && board2.arr[i+2][j+2].player == "p2" && board2.arr[i+3][j+3].player == "p2")
+				{
+					theresult.p1=0;
+					theresult.p2=1;
+					return theresult;
+				
+				}
+				}
+				catch(Exception e) {
+					
+				}
+			}
+			if(board2.arr[i][j].player!=null && board2.arr[i][j].player=="p2")
+			{
+				try {
+				if(board2.arr[i-1][j+1].player == "p2" && board2.arr[i-2][j+2].player == "p2" && board2.arr[i-3][j+3].player == "p2")
+				{
+					theresult.p1=0;
+					theresult.p2=1;
+					return theresult;
+				
+				}
+				}
+				catch(Exception e) {
+					
+				}
+			}
+	
+		}
+	}
+
+	
+	return theresult;
+}
+public static int minimax(int depth,boolean x)
+{
+	int bestscore=Integer.MIN_VALUE;
+	int score=bestscore;
+	int bestplace=(-1);
+	if(getResult().p1!=0 || getResult().p2!=0)
+	{
+		if(getResult().p2!=0)
+		{
+			return (10*depth);
+		}
+		if(getResult().p1!=0)
+		{
+			return (10*(-depth));
+		}
+		
+		
+	}
+	if(depth==0)
+	{
+		if(hardlevel) {
+			
+		
+		if(getmostofp1()>getmostofp2())
+		{
+			return getmostofp1();
+		}
+		if(getmostofp1()<getmostofp2())
+		{
+			return getmostofp2();
+		}
+		}
+		return 0;
+	}
+	if(x)
+		
+	{
+		bestscore=Integer.MAX_VALUE;
+		for(int i=0;i<7;i++)
+		{
+			if(board2.arr[0][i].player!=null)
+			{
+				
+				continue;
+				
+			}
+			board2.addforminimax(i, null, 0, 0,x);
+			score=minimax(depth-1,!x);
+			if(score<bestscore)
+			{
+				bestscore=score;
+				
+			}
+			board2.remove(i);
+		}
+		
+		return bestscore;
+	}
+if(!x)
+		
+	{
+		bestscore=Integer.MIN_VALUE;
+		for(int i=0;i<7;i++)
+		{
+			if(board2.arr[0][i].player!=null)
+			{
+				
+				continue;
+				
+			}
+			board2.addforminimax(i, null, 0, 0,x);
+			score=minimax(depth-1,!x);
+			if(score>bestscore)
+			{
+				bestscore=score;
+				
+			}
+			board2.remove(i);
+		}
+		
+		return bestscore;
+	}
+	return 0;
+}
+public static int bestmove() {
+	int bestscore=Integer.MIN_VALUE;
+	int score=bestscore;
+	int bestplace=-1;
+	boolean y=p1IsNowPlaying;
+	for(int i=0;i<7;i++)
+	{
+		if(board2.arr[0][i].player!=null)
+		{
+			
+			continue;
+			
+		}
+		board2.addforminimax(i, null, 0, 0,y);
+		score=minimax(4,!y);
+		if(score>bestscore)
+		{
+			bestscore=score;
+			bestplace=i;
+		}
+		board2.remove(i);
+	}
+	return bestplace;
+}
+public  static int getmostofp1()
+{
+	int most=0;
+	int count=0;
+	for(int i=0;i<6;i++)
+	{
+		for(int j=0;j<7;j++)
+		{
+			try {
+			if(board2.arr[i][j].player.equals("p1"))
+			{
+				count++;
+				if(board2.arr[i+1][j].player.equals( "p1")) 
+				{
+					count++;
+					if(board2.arr[i+2][j].player.equals("p1"))
+					{
+						count++;
+						if( board2.arr[i+3][j].player.equals("p1"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			count=0;
+			
+			try {
+			if(board2.arr[i][j].player.equals("p1"))
+			{
+				count++;
+				if(board2.arr[i][j+1].player.equals( "p1")) 
+				{
+					count++;
+					if(board2.arr[i][j+2].player.equals("p1"))
+					{
+						count++;
+						if( board2.arr[i][j+3].player.equals("p1"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			count=0;
+			
+			try {
+			if(board2.arr[i][j].player.equals("p1"))
+			{
+				count++;
+				if(board2.arr[i+1][j+1].player.equals( "p1")) 
+				{
+					count++;
+					if(board2.arr[i+2][j+2].player.equals("p1"))
+					{
+						count++;
+						if( board2.arr[i+3][j+3].player.equals("p1"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			count=0;
+
+				
+			try {
+			if(board2.arr[i][j].player.equals("p1"))
+			{
+				count++;
+				if(board2.arr[i+1][j-1].player.equals( "p1")) 
+				{
+					count++;
+					if(board2.arr[i+2][j-2].player.equals("p1"))
+					{
+						count++;
+						if( board2.arr[i+3][j-3].player.equals("p1"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e) 
+			{
+				
+			}
+			count=0;
+			try {
+				if(board2.arr[i][j].player.equals("p1"))
+				{
+					count++;
+					if(board2.arr[i][j-1].player.equals( "p1")) 
+					{
+						count++;
+						if(board2.arr[i][j-2].player.equals("p1"))
+						{
+							count++;
+							if( board2.arr[i][j-3].player.equals("p1"))
+							{
+								count++;
+							}
+
+
+						}
+						
+					}
+					
+				}
+				if(count>most)
+				{
+					most=count;
+				}
+				}
+				catch(Exception e) 
+				{
+					
+				}
+				count=0;
+				try {
+					if(board2.arr[i][j].player.equals("p1"))
+					{
+						count++;
+						if(board2.arr[i-1][j].player.equals( "p1")) 
+						{
+							count++;
+							if(board2.arr[i-2][j].player.equals("p1"))
+							{
+								count++;
+								if( board2.arr[i-3][j].player.equals("p1"))
+								{
+									count++;
+								}
+
+
+							}
+							
+						}
+						
+					}
+					if(count>most)
+					{
+						most=count;
+					}
+					}
+					catch(Exception e) 
+					{
+						
+					}
+					count=0;
+					try {
+						if(board2.arr[i][j].player.equals("p1"))
+						{
+							count++;
+							if(board2.arr[i-1][j-1].player.equals( "p1")) 
+							{
+								count++;
+								if(board2.arr[i-2][j-2].player.equals("p1"))
+								{
+									count++;
+									if( board2.arr[i-3][j-3].player.equals("p1"))
+									{
+										count++;
+									}
+
+
+								}
+								
+							}
+							
+						}
+						if(count>most)
+						{
+							most=count;
+						}
+						}
+						catch(Exception e) 
+						{
+							
+						}
+						count=0;
+						try {
+							if(board2.arr[i][j].player.equals("p1"))
+							{
+								count++;
+								if(board2.arr[i-1][j+1].player.equals( "p1")) 
+								{
+									count++;
+									if(board2.arr[i-2][j+2].player.equals("p1"))
+									{
+										count++;
+										if( board2.arr[i-3][j+3].player.equals("p1"))
+										{
+											count++;
+										}
+
+
+									}
+									
+								}
+								
+							}
+							if(count>most)
+							{
+								most=count;
+							}
+							}
+							catch(Exception e) 
+							{
+								
+							}
+							count=0;
+		}
+	}
+	return most;
+}
+
+
+
+public  static int getmostofp2()
+{
+	int most=0;
+	int count=0;
+	for(int i=0;i<6;i++)
+	{
+		for(int j=0;j<7;j++)
+		{
+			try {
+			if(board2.arr[i][j].player.equals("p2"))
+			{
+				count++;
+				if(board2.arr[i+1][j].player.equals( "p2")) 
+				{
+					count++;
+					if(board2.arr[i+2][j].player.equals("p2"))
+					{
+						count++;
+						if( board2.arr[i+3][j].player.equals("p2"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			count=0;
+			
+			try {
+			if(board2.arr[i][j].player.equals("p2"))
+			{
+				count++;
+				if(board2.arr[i][j+1].player.equals( "p2")) 
+				{
+					count++;
+					if(board2.arr[i][j+2].player.equals("p2"))
+					{
+						count++;
+						if( board2.arr[i][j+3].player.equals("p2"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			count=0;
+			
+			try {
+			if(board2.arr[i][j].player.equals("p2"))
+			{
+				count++;
+				if(board2.arr[i+1][j+1].player.equals( "p2")) 
+				{
+					count++;
+					if(board2.arr[i+2][j+2].player.equals("p2"))
+					{
+						count++;
+						if( board2.arr[i+3][j+3].player.equals("p2"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			count=0;
+
+				
+			try {
+			if(board2.arr[i][j].player.equals("p2"))
+			{
+				count++;
+				if(board2.arr[i+1][j-1].player.equals( "p2")) 
+				{
+					count++;
+					if(board2.arr[i+2][j-2].player.equals("p2"))
+					{
+						count++;
+						if( board2.arr[i+3][j-3].player.equals("p2"))
+						{
+							count++;
+						}
+
+
+					}
+					
+				}
+				
+			}
+			if(count>most)
+			{
+				most=count;
+			}
+			}
+			catch(Exception e) 
+			{
+				
+			}
+			count=0;
+			try {
+				if(board2.arr[i][j].player.equals("p2"))
+				{
+					count++;
+					if(board2.arr[i][j-1].player.equals( "p2")) 
+					{
+						count++;
+						if(board2.arr[i][j-2].player.equals("p2"))
+						{
+							count++;
+							if( board2.arr[i][j-3].player.equals("p2"))
+							{
+								count++;
+							}
+
+
+						}
+						
+					}
+					
+				}
+				if(count>most)
+				{
+					most=count;
+				}
+				}
+				catch(Exception e) 
+				{
+					
+				}
+				count=0;
+				try {
+					if(board2.arr[i][j].player.equals("p2"))
+					{
+						count++;
+						if(board2.arr[i-1][j].player.equals( "p2")) 
+						{
+							count++;
+							if(board2.arr[i-2][j].player.equals("p2"))
+							{
+								count++;
+								if( board2.arr[i-3][j].player.equals("p2"))
+								{
+									count++;
+								}
+
+
+							}
+							
+						}
+						
+					}
+					if(count>most)
+					{
+						most=count;
+					}
+					}
+					catch(Exception e) 
+					{
+						
+					}
+					count=0;
+					try {
+						if(board2.arr[i][j].player.equals("p2"))
+						{
+							count++;
+							if(board2.arr[i-1][j-1].player.equals( "p2")) 
+							{
+								count++;
+								if(board2.arr[i-2][j-2].player.equals("p2"))
+								{
+									count++;
+									if( board2.arr[i-3][j-3].player.equals("p2"))
+									{
+										count++;
+									}
+
+
+								}
+								
+							}
+							
+						}
+						if(count>most)
+						{
+							most=count;
+						}
+						}
+						catch(Exception e) 
+						{
+							
+						}
+						count=0;
+						try {
+							if(board2.arr[i][j].player.equals("p2"))
+							{
+								count++;
+								if(board2.arr[i-1][j+1].player.equals( "p2")) 
+								{
+									count++;
+									if(board2.arr[i-2][j+2].player.equals("p2"))
+									{
+										count++;
+										if( board2.arr[i-3][j+3].player.equals("p2"))
+										{
+											count++;
+										}
+
+
+									}
+									
+								}
+								
+							}
+							if(count>most)
+							{
+								most=count;
+							}
+							}
+							catch(Exception e) 
+							{
+								
+							}
+							count=0;
+		}
+	}
+	return most;
+}
+
+
+public void mouseClicked(MouseEvent e) {
+		int count=0;
+		int x=e.getX();
+		int y=e.getY();
+		for(int j=0;j<arr2.length-1;j++) {
+			if((x>=arr2[j])&&(x<=arr2[j+1])) {
+				count=j;
+				break;
+			}
+			
+		}
+		if(x>=arr2[arr2.length-1]){
+			count=arr2.length-1;
+			}
+		board2.add(count, this.getGraphics(), x, y);
+		
+		
+	
+
+}
+
+
+
+
+
+
+
+
+
+public void mousePressed(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+public void mouseReleased(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+public void mouseEntered(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+public void mouseExited(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+};
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
