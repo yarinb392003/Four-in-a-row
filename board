@@ -1,0 +1,103 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JOptionPane;
+public class board {
+	public Color thisColor;
+	public circle[][]arr;
+	public board() 
+	{
+		this.arr=new circle[6][7];
+		for(int i=0;i<6;i++)
+		{
+			for(int j=0;j<7;j++)
+			{
+				this.arr[i][j]=new circle();
+			}
+		}
+			
+		//Graphics g=game3.frame3.getGraphics();
+	}
+	public void add(int index,Graphics g,int x,int y)
+	{
+		if(this.arr[0][index].player!=null)
+		{
+			JOptionPane.showMessageDialog(null, " Error - col is full");
+			return;
+			
+		}
+		
+		
+		int j=0;
+		for(int i=5;i>=0;i--)
+		{
+			if(this.arr[i][index].player==null)
+			{
+				this.arr[i][index]=new circle(game3.p1IsNowPlaying);;
+				j=i;
+				break;
+			}
+				
+		}
+		if(game3.p1IsNowPlaying)
+		{
+			thisColor=game3.p1Color;
+			
+		}
+		else
+		{
+			thisColor=game3.p2Color;
+		}
+		g.setColor(thisColor);
+		g.fillOval(29 +95*(index),59+82*j, 67,67);
+		Result theresult=game3.getResult();
+		if(theresult.p1!=0 || theresult.p2!=0)
+		{
+			JOptionPane.showMessageDialog(null, " game over");
+		}
+		game3.p1IsNowPlaying=!game3.p1IsNowPlaying;
+		if(!game3.p1IsNowPlaying)
+		{
+			int thebest=game3.bestmove();
+			this.add(thebest, g, x, y);
+		}
+	}
+	public void addforminimax(int index,Graphics g,int x,int y,boolean z)
+	{
+		if(this.arr[0][index].player!=null)
+		{
+			JOptionPane.showMessageDialog(null, " Error - col is full");
+			return;
+			
+		}
+		
+		
+		int j=0;
+		for(int i=5;i>=0;i--)
+		{
+			if(this.arr[i][index].player==null)
+			{
+				this.arr[i][index]=new circle(z);;
+				j=i;
+				break;
+			}
+				
+		}
+		
+		
+		
+		
+		
+		z=!z;
+	}
+	public void remove(int i) {
+		for(int j=0;j<6;j++)
+		{
+			if(this.arr[j][i].player!=null)
+			{
+				this.arr[j][i].player=null;
+				return;
+			}
+		}
+	}
+
+}
