@@ -1,0 +1,17 @@
+
+public class Result {
+	 public int p1;
+	 public int p2;
+	 
+	 public Result()
+	 {
+		 this.p1=0;
+		 this.p2=0;
+	 }
+	 public Result(int p1, int p2)
+	 {
+		 this.p1=p1;
+		 this.p2=p2;;
+	 }
+
+}
