@@ -1,0 +1,22 @@
+import java.awt.Color;
+
+public class circle {
+	public String player;
+
+	public circle() {
+		this.player=null;
+	}
+	public circle(boolean p1IsNowPlaying) {
+		if(p1IsNowPlaying)
+		{
+			this.player="p1";
+			
+		}
+		else
+		{
+			this.player="p2";
+		}
+	}
+}
+
+
