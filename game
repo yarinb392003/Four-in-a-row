@@ -1,0 +1,155 @@
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JButton;
+import java.awt.Button;
+import java.awt.Font;
+
+public class game extends JFrame {
+
+private JPanel contentPane;
+public  static game frame;
+
+
+
+/**
+* Launch the application.
+*/
+public static void main(String[] args) {
+EventQueue.invokeLater(new Runnable() {
+public void run() {
+try {
+
+frame = new game();
+frame.setVisible(true);
+frame.setTitle("Four in a row");
+
+}
+catch (Exception e) {
+
+
+
+e.printStackTrace();
+}
+
+
+}});
+
+
+}
+
+/**
+* Create the frame.
+*/
+public game() {
+setBounds(new Rectangle(0, 0, 420, 310));
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+setBounds(100, 100, 850, 540);
+
+
+JMenuBar menuBar = new JMenuBar();
+setJMenuBar(menuBar);
+/*
+JButton btnNewButton = new JButton("settings");
+btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
+menuBar.add(btnNewButton);
+
+JButton btnNewButton_1 = new JButton("how to play");
+btnNewButton_1.setFont(new Font("Sitka Small", Font.BOLD, 12));
+menuBar.add(btnNewButton_1);
+*/
+JButton btnNewButton_2 = new JButton("about the game");
+btnNewButton_2.setFont(new Font("Sitka Small", Font.BOLD, 12));
+menuBar.add(btnNewButton_2);
+contentPane = new JPanel();
+contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+setContentPane(contentPane);
+contentPane.setLayout(null);
+ImageIcon img=new ImageIcon("four in a row bg.png");
+JLabel bg=new JLabel(" ",new ImageIcon("C:\\Users\\user\\Desktop\\output-onlinepngtools_8_850x540.png"),JLabel.RIGHT);
+bg.setBackground(Color.WHITE);
+bg.setBounds(0, 0, 857, 474);
+contentPane.add(bg);
+bg.setVisible(true);
+btnNewButton_2.setFont(new Font("Sitka Small", Font.BOLD, 12));
+btnNewButton_2.setFont(new Font("Sitka Small", Font.BOLD, 12));
+
+
+
+JButton btn3=new JButton("start game");
+contentPane.add(btn3);
+bg.add(btn3);
+btn3.setFont(new Font("Sitka Small", Font.BOLD, 15));
+btn3.setBounds(638, 121, 100, 50);
+btn3.setVisible(true);
+btn3.setBorder(null);
+btn3.setContentAreaFilled(false);
+btn3.setForeground(Color.WHITE);
+
+
+
+
+JButton btnNewButton_4 = new JButton("quit game");
+contentPane.add(btnNewButton_4);
+bg.add(btnNewButton_4);
+btnNewButton_4.setFont(new Font("Sitka Small", Font.BOLD, 15));
+btnNewButton_4.setBorder(null);
+btnNewButton_4.setContentAreaFilled(false);
+btnNewButton_4.setBounds(638, 234, 100,50);
+btnNewButton_4.setForeground(Color.WHITE);
+
+
+
+ActionListener hear = new ActionListener()
+{
+public void actionPerformed(ActionEvent actionEvent) {
+
+if(actionEvent.getSource().equals(btnNewButton_4))
+{
+
+System.exit(0);
+}
+if(actionEvent.getSource().equals(btn3))
+{
+frame.dispose();
+prelaunch frame3=new prelaunch();
+frame3.setVisible(true);
+
+}
+if(actionEvent.getSource().equals(btnNewButton_2))
+{
+	frame.dispose();
+	aboutthegame frame4=new aboutthegame();
+	frame4.setVisible(true);
+	
+}
+
+
+
+
+
+
+}
+};;
+btnNewButton_4.addActionListener(hear);
+btn3.addActionListener(hear);
+btnNewButton_2.addActionListener(hear);
+
+
+}
+}
+
+
+
+
